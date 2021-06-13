@@ -1,3 +1,8 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.hero {
+    background: rgb(97,193,195);
+    background: linear-gradient(90deg, rgba(97,193,195,1) 0%, rgba(98,180,209,1) 42%, rgba(24,174,226,1) 100%);
+}
