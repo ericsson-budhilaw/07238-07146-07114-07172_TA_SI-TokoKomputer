@@ -33374,19 +33374,6 @@ select {
   --tw-backdrop-sepia: sepia(100%);
 }
 
-.hero {
-  background: rgb(204,211,212);
-  background: linear-gradient(90deg, rgba(204,211,212,1) 0%, rgba(169,208,222,1) 40%, rgba(117,187,212,1) 100%);
-}
-
-.item-thumbnail {
-  width: 550px;
-  height: 380px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  background-color: #ccd3d4;
-}
-
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -195836,5 +195823,4 @@ select {
     --tw-backdrop-sepia: sepia(100%);
   }
 }
-
 

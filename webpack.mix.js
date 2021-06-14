@@ -11,11 +11,22 @@ const mix = require('laravel-mix');
  |
  */
 
+// mix.js('resources/js/app.js', 'public/js')
+//     .postCss('resources/scss/app.scss', 'public/css', [
+//         require('postcss-import'),
+//         require('tailwindcss'),
+//     ]);
+
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
-    ]);
+    ])
+    .sass('resources/scss/fontawesome.scss', 'public/css')
+    .copy(
+        'node_modules/@fortawesome/fontawesome-free/webfonts',
+        'public/webfonts'
+    );
 
 if (mix.inProduction()) {
     mix.version();

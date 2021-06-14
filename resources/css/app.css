@@ -3,6 +3,14 @@
 @import 'tailwindcss/utilities';
 
 .hero {
-    background: rgb(97,193,195);
-    background: linear-gradient(90deg, rgba(97,193,195,1) 0%, rgba(98,180,209,1) 42%, rgba(24,174,226,1) 100%);
+    background: rgb(204,211,212);
+    background: linear-gradient(90deg, rgba(204,211,212,1) 0%, rgba(169,208,222,1) 40%, rgba(117,187,212,1) 100%);
 }
+
+.item-thumbnail {
+    width: 550px;
+    height: 380px;
+    object-fit: cover;
+    background-color: #ccd3d4;
+}
+

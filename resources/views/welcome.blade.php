@@ -7,6 +7,7 @@
         <title>Laravel</title>
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/fontawesome.css')  }}" rel="stylesheet">
         @livewireStyles
     </head>
     <body class="antialiased">
@@ -22,14 +23,15 @@
                     <p class="mb-8 text-2xl font-bold tracking-wide text-gray-700">Semua permainan dapat ditaklukan</p>
                     <div class="price-tag grid gap-2 grid-cols-2 w-1/2">
                         <p class="text-1xl text-center p-4 bg-blue-600 text-gray-300 shadow">Rp.16.999.000</p>
-                        <button class="text-1xl text-center tracking-wider bg-gray-300 shadow">BELI SEKARANG</button>
+                        <button class="text-1xl text-center tracking-wider bg-gray-300 shadow hover:bg-gray-200">BELI SEKARANG <i class="fas fa-shopping-cart"></i></button>
                     </div>
                 </div>
             </div>
         </section>
-{{--        <img src="{{ asset('storage/toko-togo.png') }}" alt="">--}}
+        <livewire:latest-products />
+        <livewire:random-products />
 
-        <livewire:counter />
+        <livewire:footer />
 
         @livewireScripts
     </body>
