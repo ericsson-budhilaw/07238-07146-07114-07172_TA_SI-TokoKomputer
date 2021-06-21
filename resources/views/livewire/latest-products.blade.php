@@ -12,5 +12,7 @@
             </div>
         @endforeach
     </div>
-    <button class="text-center w-full rounded bg-gray-200 mt-4 p-2 text-gray-400 hover:bg-gray-300">Lihat lainnya</button>
+    <button class="text-center w-full rounded bg-gray-200 mt-4 p-2 text-gray-400 hover:bg-gray-300 focus:outline-none">
+        <a href="{{ route('toko') }}">Lihat lainnya</a>
+    </button>
 </div>

@@ -33387,6 +33387,11 @@ select {
   background-color: #ccd3d4;
 }
 
+body.modal-active {
+  overflow-x: hidden;
+  overflow-y: visible !important;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

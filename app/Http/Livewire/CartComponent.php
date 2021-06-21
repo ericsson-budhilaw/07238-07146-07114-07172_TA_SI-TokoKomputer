@@ -10,6 +10,7 @@ class CartComponent extends Component
 {
     protected $total;
     protected $content;
+    public $cart;
 
     protected $listeners = [
         'productAddedToCart' => 'updateCart'
@@ -22,7 +23,8 @@ class CartComponent extends Component
      */
     public function mount(): void
     {
-        $this->updateCart();
+        $this->cart = 'modal opacity-0 pointer-events-none';
+        $this->updateCart($this->cart);
     }
 
     /**
@@ -34,8 +36,21 @@ class CartComponent extends Component
     {
         return view('livewire.cart-component', [
             'total' => $this->total,
-            'content' => $this->content
+            'content' => $this->content,
+            'cart' => $this->cart
         ]);
+    }
+
+    /**
+     * Removes a cart item by id.
+     *
+     * @param string $id
+     * @return void
+     */
+    public function removeFromCart(string $id): void
+    {
+        Cart::remove($id);
+        $this->updateCart();
     }
 
     /**
@@ -49,15 +64,32 @@ class CartComponent extends Component
         $this->updateCart();
     }
 
+    /**
+     * Updates a cart item.
+     *
+     * @param string $id
+     * @param string $action
+     * @return void
+     */
     public function updateCartItem(string $id, string $action): void
     {
-        Cart::update();
+        Cart::update($id, $action);
         $this->updateCart();
     }
 
-    public function updateCart(): void
+    /**
+     * Rerenders the cart items and total price on the browser.
+     *
+     * @return void
+     */
+    public function updateCart($cart = ''): void
     {
+        if ($cart == 'show')
+        {
+            $this->cart = 'modal opacity-100 pointer-events-auto';
+        }
         $this->total = Cart::total();
         $this->content = Cart::content();
+        $this->emitTo('navbar', 'updateCount');
     }
 }

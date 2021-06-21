@@ -29,6 +29,11 @@ class ProductList extends Component
         $this->reset();
     }
 
+//    public function paginationView()
+//    {
+//        return 'custom-pagination-links-view';
+//    }
+
     public function render()
     {
         return view('livewire.product-list', [
@@ -36,8 +41,9 @@ class ProductList extends Component
         ]);
     }
 
-    public function addToCart(int $id, string $name, string $price, string $quantity): void
+    public function addToCart(int $id, string $thumbnail, string $name, string $price, string $quantity): void
     {
-        $this->name = $name;
+        Cart::add($id, $thumbnail, $name, $price, $quantity);
+        $this->emit('productAddedToCart', 'show');
     }
 }
