@@ -33380,8 +33380,8 @@ select {
 }
 
 .item-thumbnail {
-  width: 550px;
-  height: 380px;
+  width: 450px;
+  height: 280px;
   -o-object-fit: cover;
      object-fit: cover;
   background-color: #ccd3d4;

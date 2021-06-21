@@ -1,6 +1,6 @@
-<div class="mt-4 bg-gray-300">
+<div class="mt-4 bg-gray-300 px-8 md:px-0">
     <div class="container mx-auto">
-        <div class="grid grid-cols-3 gap-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-12">
             <div class="about-us">
                 <h4 class="font-bold text-xl my-2">Alamat</h4>
                 <p class="font-semibold">SinGameShop</p>

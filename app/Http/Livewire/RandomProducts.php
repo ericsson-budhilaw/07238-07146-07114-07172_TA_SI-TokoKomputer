@@ -16,7 +16,7 @@ class RandomProducts extends Component
 
     public function mount()
     {
-        $this->items  = Item::orderBy('created_at')->inRandomOrder()->get();
+        $this->items  = Item::orderBy('created_at')->inRandomOrder()->limit(4)->get();
     }
 
     public function render()

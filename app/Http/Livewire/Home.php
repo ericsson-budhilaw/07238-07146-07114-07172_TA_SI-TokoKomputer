@@ -5,9 +5,9 @@ namespace App\Http\Livewire;
 use App\Models\Item;
 use Livewire\Component;
 
-class LatestProducts extends Component
+class Home extends Component
 {
-    public $items;
+    public $latest;
 
     function format_uang($angka){
         $hasil = "Rp." . number_format($angka,0, ',' , '.');
@@ -16,11 +16,11 @@ class LatestProducts extends Component
 
     public function mount()
     {
-        $this->items  = Item::orderBy('created_at')->limit(4)->get();
+        $this->latest  = Item::orderBy('created_at')->get();
     }
 
     public function render()
     {
-        return view('livewire.latest-products');
+        return view('livewire.home');
     }
 }

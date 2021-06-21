@@ -8,8 +8,8 @@
 }
 
 .item-thumbnail {
-    width: 550px;
-    height: 380px;
+    width: 450px;
+    height: 280px;
     object-fit: cover;
     background-color: #ccd3d4;
 }

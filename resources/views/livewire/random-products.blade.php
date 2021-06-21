@@ -1,6 +1,6 @@
-<div class="container mx-auto">
+<div class="container mx-auto px-8 md:px-0">
     <h1 class="text-2xl font-bold text-gray-400 font-sans py-2 my-12 border-b-4">Pilihan Kami</h1>
-    <div class="items grid grid-cols-4 gap-8 mt-4">
+    <div class="items grid grid-cols-1 md:grid-cols-4 gap-8 mt-4">
         @foreach($items as $item)
             <div class="item-{{ $item->id }}">
                 <img src="{{ asset($item->thumbnail)  }}" alt="{{ $item->name }}" class="item-thumbnail p-4 shadow">
