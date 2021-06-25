@@ -1,7 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+
+use App\Http\Livewire\Login;
+use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Welcome;
+use App\Http\Livewire\Toko;
+use App\Http\Livewire\SingleProduct;
+use App\Http\Livewire\Checkout;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +21,19 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get("/toko", Toko::class)->name("toko");
 
-Route::get("/", [HomeController::class, 'index'])->name("home");
-Route::get("/toko", [HomeController::class, 'toko'])->name("toko");
+Route::get('/', Welcome::class)->name('home');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('login', Login::class)->name('login');
+
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
+    Route::get('home', Dashboard::class)->name('user.home');
+    Route::get('checkout', Checkout::class)->name('user.checkout');
+});
+
+Route::get('product/{slug}', SingleProduct::class)->name('product.single');
+
+//Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//    return view('dashboard');
+//})->name('dashboard');

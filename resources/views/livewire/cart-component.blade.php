@@ -1,5 +1,5 @@
 <div>
-    <div id="modal" class="{{ $cart }} fixed w-full h-full top-0 left-0 flex items-center justify-end">
+    <div id="modal" class="{{ $cart }} fixed w-full h-full top-0 left-0 flex items-center justify-end block">
         <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
         <div class="modal-content py-4 text-left px-4 h-full bg-white shadow-lg z-50 overflow-y-auto w-72">
@@ -29,7 +29,7 @@
                                 <button class="text-sm bg-gray-300 text-gray-400 px-2 py-1"
                                         wire:click="updateCartItem({{ $id }}, 'plus')"><i class="fas fa-plus"></i></button>
                                 <button class="text-sm bg-red-500 text-gray-100 px-2 py-1"
-                                        wire:click="removeFromCart({{ $id }})""><i class="fas fa-times"></i></button>
+                                        wire:click="removeFromCart({{ $id }})"><i class="fas fa-times"></i></button>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,8 @@
             <div class="absolute bottom-6">
                 <span class="text-green-500 text-base">Subtotal: </span>
                 <span class="text-gray-900 text-xl font-bold">{{ $total }}</span>
-                <button class="bg-green-600 px-4 py-2 text-xl text-gray-100 w-64 md:w-full">Konfirmasi Pesanan</button>
+                <button wire:click="checkout"
+                    class="bg-green-600 px-4 py-2 text-xl text-gray-100 w-64 md:w-full">Konfirmasi Pesanan</button>
             </div>
         </div>
     </div>

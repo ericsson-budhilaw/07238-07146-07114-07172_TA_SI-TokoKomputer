@@ -1,4 +1,3 @@
-<!-- Hero Section -->
 <section class="hero">
     <div class="mx-auto py-5 container grid gap-4 grid-cols-1 md:grid-cols-2">
         <div class="mx-auto">
@@ -16,22 +15,28 @@
     </div>
 </section>
 
-<!-- Latest Products -->
+{{-- Latest Product --}}
 <div class="container mx-auto px-8 md:px-0">
     <h1 class="text-2xl font-bold text-gray-400 font-sans py-2 my-12 border-b-4">Produk Terbaru</h1>
     <div class="items grid grid-cols-1 md:grid-cols-4 gap-8 mt-4">
         @foreach($latest as $item)
-            <div class="item-{{ $item->id }}">
-                <img src="{{ asset($item->thumbnail)  }}" alt="{{ $item->name }}" class="item-thumbnail p-4 shadow">
-                <div class="product-info my-4 text-center">
-                    <h1 class="text-xl font-bold tracking-tight">{{ $item->name }}</h1>
-                    <p class="text-xl font-bold text-blue-600">{{ $this->format_uang($item->price)  }}</p>
-                    <button class="my-4 py-2 px-4 mx-auto rounded bg-blue-400 text-gray-200 hover:bg-blue-500">Beli Sekarang <i class="fas fa-shopping-cart"></i></button>
-                </div>
-            </div>
+            <livewire:product :item="$item" :wire:key="$item->id" />
         @endforeach
     </div>
-    <button class="text-center w-full rounded bg-gray-200 mt-4 p-2 text-gray-400 hover:bg-gray-300">Lihat lainnya</button>
+    <button class="text-center w-full rounded bg-gray-200 mt-4 p-2 text-gray-400 hover:bg-gray-300 focus:outline-none">
+        <a href="{{ route('toko') }}">Lihat lainnya</a>
+    </button>
 </div>
 
-<livewire:random-products />
+{{-- Random Product --}}
+<div class="container mx-auto px-8 md:px-0">
+    <h1 class="text-2xl font-bold text-gray-400 font-sans py-2 my-12 border-b-4">Pilihan Kami</h1>
+    <div class="items grid grid-cols-1 md:grid-cols-4 gap-8 mt-4">
+        @foreach($random as $item)
+            <livewire:product :item="$item" :wire:key="$item->id" />
+        @endforeach
+    </div>
+    <button class="text-center w-full rounded bg-gray-200 mt-4 p-2 text-gray-400 hover:bg-gray-300 focus:outline-none">
+        <a href="{{ route('toko') }}">Lihat lainnya</a>
+    </button>
+</div>

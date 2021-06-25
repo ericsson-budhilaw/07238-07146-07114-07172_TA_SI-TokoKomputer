@@ -13,4 +13,9 @@ class HomeController extends Controller
     {
         return view("toko");
     }
+
+    public function admin()
+    {
+        return view("admin");
+    }
 }

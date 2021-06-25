@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Item;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 
@@ -33,13 +34,27 @@ class CartService
      * @param array $options
      * @return void
      */
-    public function add($id, $thumbnail, $name, $price, $quantity, $options = []): void
+    public function add($id, $thumbnail, $name, $price, $stok, $quantity, $options = []): void
     {
-        $cartItem   = $this->createCartItem($thumbnail, $name, $price, $quantity, $options);
+        $cartItem   = $this->createCartItem($thumbnail, $name, $price, $stok, $quantity, $options);
 
         $content    = $this->getContent();
 
+        // If the quantity more than the stok, then set the quantity variable same as the stok
+        // Prevent order over stok
+        if($quantity > $stok) $quantity = $stok;
+
         if ($content->has($id)) {
+            $quantityCart = $content->get($id)->get('quantity');
+            $stokCart = $content->get($id)->get('stok');
+            $total = $stokCart - $quantityCart;
+
+            if($total == 0 && $quantity > 0)
+            {
+                $this->session->put(self::DEFAULT_INSTANCE, $content);
+                return;
+            }
+
             $cartItem->put('quantity', $content->get($id)->get('quantity') + $quantity);
         }
 
@@ -61,10 +76,16 @@ class CartService
 
         if ($content->has($id)) {
             $cartItem = $content->get($id);
+            $stok = $content->get($id)->get('stok');
 
             switch ($action) {
                 case 'plus':
-                    $cartItem->put('quantity', $content->get($id)->get('quantity') + 1);
+                    $updatedQuantity = $content->get($id)->get('quantity') + 1;
+                    if($updatedQuantity > $stok)
+                    {
+                        $updatedQuantity = $stok;
+                    }
+                    $cartItem->put('quantity', $updatedQuantity);
                     break;
                 case 'minus':
                     $updatedQuantity = $content->get($id)->get('quantity') - 1;
@@ -153,7 +174,7 @@ class CartService
      * @param array $options
      * @return Collection
      */
-    protected function createCartItem(string $thumbnail, string $name, string $price, string $quantity, array $options): Collection
+    protected function createCartItem(string $thumbnail, string $name, string $price, string $stok, string $quantity, array $options): Collection
     {
         $price      = floatval($price);
         $quantity   = intval($quantity);
@@ -166,6 +187,7 @@ class CartService
             'thumbnail' => $thumbnail,
             'name' => $name,
             'price' => $price,
+            'stok' => $stok,
             'quantity' => $quantity,
             'options' => $options
         ]);

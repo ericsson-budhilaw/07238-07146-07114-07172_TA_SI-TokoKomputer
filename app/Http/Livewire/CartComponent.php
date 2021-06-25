@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Facades\Cart;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
+use Livewire\Redirector;
 
 class CartComponent extends Component
 {
@@ -39,6 +40,16 @@ class CartComponent extends Component
             'content' => $this->content,
             'cart' => $this->cart
         ]);
+    }
+
+    /**
+     * Proceed checkout
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function checkout(): Redirector
+    {
+        return redirect()->route('user.checkout');
     }
 
     /**

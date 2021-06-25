@@ -15,9 +15,9 @@
     <!-- Header -->
     <livewire:navbar />
 
-    <div class="min-h-screen">
+    <div class="{{ isset($divCSS) ? $divCSS : '' }}">
         <!-- Page Content -->
-        <main>
+        <main class="{{ isset($mainCSS) ? $mainCSS : '' }}">
             {{ $slot }}
         </main>
     </div>
@@ -27,14 +27,14 @@
 
     @livewireScripts
 
-    <livewire:cart-component>
+    <livewire:cart-component />
 
     <script>
         function toggleModal()
         {
             const modal = document.getElementById('modal')
             modal.className = 'modal opacity-0 pointer-events-none fixed' +
-                'w-full h-full top-0 left-0 flex items-center justify-end'
+                'w-full h-full top-0 left-0 flex items-center justify-end hidden'
         }
 
         function mobileMenu()
@@ -43,8 +43,50 @@
             showMenu.classList.toggle('hidden')
         }
 
+        function userMenu()
+        {
+            const showMenu = document.getElementById('user-account-navigation')
+            showMenu.classList.toggle('hidden');
+        }
+
         const overlay = document.querySelector('.modal-overlay')
         overlay.addEventListener('click', toggleModal)
+
+        function decrement(e) {
+            const btn = e.target.parentNode.parentElement.querySelector(
+                'button[data-action="decrement"]'
+            );
+            const target = btn.nextElementSibling;
+            let value = Number(target.value);
+            value--;
+            target.value = value;
+        }
+
+        function increment(e) {
+            const btn = e.target.parentNode.parentElement.querySelector(
+                'button[data-action="decrement"]'
+            );
+            const target = btn.nextElementSibling;
+            let value = Number(target.value);
+            value++;
+            target.value = value;
+        }
+
+        const decrementButtons = document.querySelectorAll(
+            `button[data-action="decrement"]`
+        );
+
+        const incrementButtons = document.querySelectorAll(
+            `button[data-action="increment"]`
+        );
+
+        decrementButtons.forEach(btn => {
+            btn.addEventListener("click", decrement);
+        });
+
+        incrementButtons.forEach(btn => {
+            btn.addEventListener("click", increment);
+        });
     </script>
 </body>
 </html>
