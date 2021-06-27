@@ -3,10 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Facades\Cart;
-use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
+use Livewire\Redirector;
 
 class Navbar extends Component
 {
@@ -17,31 +18,78 @@ class Navbar extends Component
         'updateCount' => 'updateCount'
     ];
 
-    public function mount()
+    /**
+     * Assign currentRoute to $route
+     * and updateCount
+     *
+     * @return void
+     */
+    public function mount(): void
     {
         $this->route = Route::currentRouteName();
         $this->updateCount();
     }
 
-    public function render()
+    /**
+     * Render the navbar
+     *
+     * @return View
+     */
+    public function render(): View
     {
         return view('livewire.navbar');
     }
 
-    public function checkCart()
+    /**
+     * Run Add To Cart function
+     *
+     * @return void
+     */
+    public function checkCart(): void
     {
         $this->emit('productAddedToCart', 'show');
     }
 
-    public function updateCount()
+    /**
+     * Update the count of the cart
+     *
+     * @return void
+     */
+    public function updateCount(): void
     {
         $this->total = count(Cart::content());
     }
 
-    public function logout()
+    /**
+     * Go to dashboard page
+     *
+     * @return Redirector
+     */
+    public function dashboard(): Redirector
+    {
+        return redirect()->route('user.home');
+    }
+
+    /**
+     * Go to login page
+     *
+     * @return Redirector
+     */
+    public function login(): Redirector
+    {
+        return redirect()->route('login');
+    }
+
+    /**
+     * Logout auth
+     *
+     * @return Redirector
+     */
+    public function logout(): Redirector
     {
         Auth::logout();
-        session()->flush();
-        return redirect()->route('admin.login');
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect()->route('login');
     }
 }

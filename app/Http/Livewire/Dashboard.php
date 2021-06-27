@@ -12,11 +12,17 @@ class Dashboard extends Component
     public $user;
     public $message;
 
+    public $active  = 'profile';
+    public $column  = 'grid-cols-3';
+    public $isAdmin = false;
+
     public function mount()
     {
-        if(!User::isAdmin())
+        if(User::isAdmin())
         {
-            return redirect()->route('login');
+            $this->active   = 'product';
+            $this->isAdmin  = true;
+            $this->column   = "grid-cols-5";
         }
         $this->user = Auth::user();
     }
@@ -25,7 +31,12 @@ class Dashboard extends Component
     {
         return view('livewire.dashboard')->layout('components.layout', [
             'divCSS' => 'flex justify-center content-center items-center',
-            'mainCSS' => 'min-h-screen container mx-auto py-28'
+            'mainCSS' => 'min-h-screen container mx-auto py-8'
         ]);
+    }
+
+    public function tab(string $action)
+    {
+        $this->active = $action;
     }
 }

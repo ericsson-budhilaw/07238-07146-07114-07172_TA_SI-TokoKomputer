@@ -14,6 +14,11 @@
     background-color: #ccd3d4;
 }
 
+.cart-contents {
+    max-height: calc(100vh - 210px);
+    overflow: auto;
+}
+
 body.modal-active {
     overflow-x: hidden;
     overflow-y: visible !important;

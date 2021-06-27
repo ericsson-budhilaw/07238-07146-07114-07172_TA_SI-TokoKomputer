@@ -12,12 +12,16 @@ class Login extends Component
 {
     public $email;
     public $password;
+    public $rememberMe = false;
 
     protected $rules = [
         'email' => 'required|email',
         'password' => 'required'
     ];
 
+    /**
+     * Lifecycle mount
+     */
     public function mount()
     {
         if(Auth::check())
@@ -27,17 +31,45 @@ class Login extends Component
         }
     }
 
-    public function login(): Redirector
+    /**
+     * Login method
+     */
+    public function login()
     {
         $this->validate();
 
-        if(Auth::attempt(['email' => $this->email, 'password' => $this->password]))
+        if(Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->rememberMe))
         {
             if(User::isAdmin()) return redirect()->route('user.home');
             return redirect()->route('home');
         }
+
+        session()->flash('error', 'E-mail atau Password salah');
+        $this->password = '';
+        $this->emit('alert_remove');
     }
 
+    /**
+     * Redirect to register page
+     */
+    public function register()
+    {
+        return redirect()->route('register');
+    }
+
+    /**
+     * Redirect to forgot password page.
+     */
+    public function forgotPassword()
+    {
+        return redirect()->route('password.request');
+    }
+
+    /**
+     * Render the component
+     *
+     * @return View
+     */
     public function render(): View
     {
         return view('livewire.login')->layout('components.layout', [

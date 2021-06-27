@@ -13,29 +13,31 @@
                             wire:click="clearCart"><i class="fas fa-times"></i></button>
                 </div>
             </div>
-            @if ($content->count() > 0)
-                @foreach ($content as $id => $item)
-                    <div class="grid grid-cols-2 gap-2 my-4">
-                        <div class="thumbnail mx-4">
-                            <img src="{{ asset($item->get('thumbnail'))  }}" alt="{{ $item->get('name') }}"
-                                 class="p-4 shadow" width="80" height="120">
-                        </div>
-                        <div class="product-details">
-                            <h2 class="text-xs font-bold mb-2">{{ $item->get('name') }}</h2>
-                            <div>
-                                <button class="text-sm bg-gray-300 text-gray-400 px-2 py-1"
-                                        wire:click="updateCartItem({{ $id }}, 'minus')"><i class="fas fa-minus"></i></button>
-                                <span class="text-sm text-gray-600">{{ $item->get('quantity') }}x</span>
-                                <button class="text-sm bg-gray-300 text-gray-400 px-2 py-1"
-                                        wire:click="updateCartItem({{ $id }}, 'plus')"><i class="fas fa-plus"></i></button>
-                                <button class="text-sm bg-red-500 text-gray-100 px-2 py-1"
-                                        wire:click="removeFromCart({{ $id }})"><i class="fas fa-times"></i></button>
+            <div class="cart-contents">
+                @if ($content->count() > 0)
+                    @foreach ($content as $id => $item)
+                        <div class="grid grid-cols-2 gap-2 my-4">
+                            <div class="thumbnail mx-4">
+                                <img src="{{ asset($item->get('thumbnail'))  }}" alt="{{ $item->get('name') }}"
+                                     class="p-4 shadow" width="80" height="120">
+                            </div>
+                            <div class="product-details">
+                                <h2 class="text-xs font-bold mb-2">{{ $item->get('name') }}</h2>
+                                <div>
+                                    <button class="text-sm bg-gray-300 text-gray-400 px-2 py-1"
+                                            wire:click="updateCartItem({{ $id }}, 'minus')"><i class="fas fa-minus"></i></button>
+                                    <span class="text-sm text-gray-600">{{ $item->get('quantity') }}x</span>
+                                    <button class="text-sm bg-gray-300 text-gray-400 px-2 py-1"
+                                            wire:click="updateCartItem({{ $id }}, 'plus')"><i class="fas fa-plus"></i></button>
+                                    <button class="text-sm bg-red-500 text-gray-100 px-2 py-1"
+                                            wire:click="removeFromCart({{ $id }})"><i class="fas fa-times"></i></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            @endif
-            <div class="absolute bottom-6">
+                    @endforeach
+                @endif
+            </div>
+            <div class="absolute bottom-6 bg-white">
                 <span class="text-green-500 text-base">Subtotal: </span>
                 <span class="text-gray-900 text-xl font-bold">{{ $total }}</span>
                 <button wire:click="checkout"
