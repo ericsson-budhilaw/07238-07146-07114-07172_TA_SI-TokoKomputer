@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Facades\Cart;
+use App\Models\detail_invoices;
+use App\Models\invoices;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -17,12 +19,25 @@ class Checkout extends Component
     public $telp;
     public $email;
 
+    public $address;
+    public $city;
+    public $state;
+    public $postalcode;
+    public $addressText;
+
     public function mount()
     {
         $user = Auth::user();
         $this->name = $user->name;
         $this->email = $user->email;
-        $this->telp = $user->telepon;
+        $this->telp = $user->telp;
+
+        // Address
+        $address = $user->address;
+        $this->city = $address->city;
+        $this->state = $address->state;
+        $this->postalcode = $address->postalcode;
+        $this->addressText = $address->address;
 
         $this->itemModel = new Item();
         $this->updateCart();
@@ -40,6 +55,13 @@ class Checkout extends Component
         ])->layout('components.layout', [
             'mainCSS' => 'container mx-auto py-28'
         ]);
+    }
+
+    public function orderProceed()
+    {
+        // 1. Create invoice
+        $invoice = new invoices();
+        $invoice->order_date =
     }
 
     /**

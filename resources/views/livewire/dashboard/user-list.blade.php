@@ -7,7 +7,8 @@
         </h1>
         <hr />
 
-        <table class="table-auto my-4">
+        <div class="table-data flex justify-center items-center">
+            <table class="table-auto my-4 text-center">
             <thead>
                 <tr>
                     <th class="border-2 border-gray-500 px-4 py-2">Name</th>
@@ -30,5 +31,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
+        {{ $users->links() }}
     </div>
 </div>

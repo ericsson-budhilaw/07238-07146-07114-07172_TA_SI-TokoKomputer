@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Redirector;
@@ -11,18 +12,18 @@ class Dashboard extends Component
 {
     public $user;
     public $message;
+    public $active;
 
-    public $active  = 'profile';
-    public $column  = 'grid-cols-3';
+    public $column  = 'grid-cols-4';
     public $isAdmin = false;
 
-    public function mount()
+    public function mount($active)
     {
+        $this->active = $active;
         if(User::isAdmin())
         {
-            $this->active   = 'product';
             $this->isAdmin  = true;
-            $this->column   = "grid-cols-5";
+            $this->column   = "grid-cols-6";
         }
         $this->user = Auth::user();
     }

@@ -4,20 +4,22 @@ namespace App\Http\Livewire\Dashboard;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class UserList extends Component
 {
-    public $users;
+    use withPagination;
+
     public $num = 0;
 
-    public function mount()
-    {
-        $this->users = User::where('isAdmin', 0)->get();
-    }
+    protected $users;
 
     public function render()
     {
-        return view('livewire.dashboard.user-list');
+        $users = User::where('isAdmin', 0)->paginate(2);
+        return view('livewire.dashboard.user-list', [
+            'users' => $users
+        ]);
     }
 
     public function edit($id)

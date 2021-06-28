@@ -13,6 +13,12 @@
                  wire:click="tab('userlist')">
                 <h3>User List</h3>
             </div>
+            <div class="tab-pane py-2 px-4 border-2 border-b-0 border-gray-200 cursor-pointer
+                 {{ ($active == 'orderlist') ? 'bg-gray-300 text-gray-800' : 'bg-gray-400 text-gray-600' }}"
+                 id="products"
+                 wire:click="tab('orderlist')">
+                <h3>Order List</h3>
+            </div>
         @endif
         <div class="tab-pane py-2 px-4 border-2 border-b-0 border-gray-200 cursor-pointer
              {{ ($active == 'profile') ? 'bg-gray-300 text-gray-800' : 'bg-gray-400 text-gray-600' }}"
@@ -40,21 +46,14 @@
             <livewire:dashboard.product-list />
         @elseif($active == 'userlist')
             <livewire:dashboard.user-list />
+        @elseif($active == 'orderlist')
+            <h1>Order List</h1>
         @elseif($active == 'profile')
-            {{-- Profile --}}
-            <div class="tab-pane" id="profile" wire:key="profile-pane">
-                <h1>Profil</h1>
-            </div>
+            <livewire:dashboard.profile />
         @elseif($active == 'changePass')
-            {{-- Change Password --}}
-            <div class="tab-pane" id="password" wire:key="password-pane">
-                <h1>Password</h1>
-            </div>
+            <livewire:dashboard.password />
         @elseif($active == 'address')
-            {{-- Address List --}}
-            <div class="tab-pane" id="password" wire:key="address-pane">
-                <h1>Alamat</h1>
-            </div>
+            <livewire:dashboard.address />
         @endif
 
     </div>

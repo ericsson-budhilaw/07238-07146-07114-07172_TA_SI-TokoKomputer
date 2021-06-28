@@ -43,7 +43,7 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'verified']], function() {
-    Route::get('home', Dashboard::class)->name('user.home');
+    Route::get('home/{active}', Dashboard::class)->name('user.home');
     Route::get('checkout', Checkout::class)->name('user.checkout');
     Route::get('{id}/edit/password', ChangePassword::class)->name('user.changepass');
 });
@@ -53,7 +53,7 @@ Route::group(['prefix' => 'email', 'middleware' => 'auth'], function() {
 
     Route::get('verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
-        return redirect()->route('user.home');
+        return redirect()->route('user.home', 'profile');
     })->name('verification.verify')->middleware('signed');
 
     Route::post('verification-notification', function (Request $request) {

@@ -13,6 +13,7 @@ class Navbar extends Component
 {
     public $total;
     public $route;
+    public $user;
 
     protected $listeners = [
         'updateCount' => 'updateCount'
@@ -26,6 +27,10 @@ class Navbar extends Component
      */
     public function mount(): void
     {
+        if(Auth::check())
+        {
+            $this->user = Auth::user();
+        }
         $this->route = Route::currentRouteName();
         $this->updateCount();
     }
@@ -67,7 +72,7 @@ class Navbar extends Component
      */
     public function dashboard(): Redirector
     {
-        return redirect()->route('user.home');
+        return redirect()->route('user.home', 'profile');
     }
 
     /**

@@ -17,9 +17,12 @@ class CreateAddressesTable extends Migration
             $table->id();
             $table->string('city');
             $table->string('state');
-            $table->string('zip');
+            $table->string('postalcode');
             $table->text('address');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
 

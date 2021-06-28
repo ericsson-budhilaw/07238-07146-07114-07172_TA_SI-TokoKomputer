@@ -26,7 +26,7 @@ class Login extends Component
     {
         if(Auth::check())
         {
-            if(User::isAdmin()) return redirect()->route('user.home');
+            if(User::isAdmin()) return redirect()->route('user.home', 'profile');
             return redirect()->route('home');
         }
     }
@@ -40,7 +40,7 @@ class Login extends Component
 
         if(Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->rememberMe))
         {
-            if(User::isAdmin()) return redirect()->route('user.home');
+            if(User::isAdmin()) return redirect()->route('user.home', 'profile');
             return redirect()->route('home');
         }
 

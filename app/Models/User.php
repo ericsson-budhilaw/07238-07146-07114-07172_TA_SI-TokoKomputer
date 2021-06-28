@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'telp',
-        'id_address'
+        'profile_photo_path'
     ];
 
     /**
@@ -62,6 +64,27 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * Define the one to one relationship
+     * with Address table
+     *
+     * @return HasOne
+     */
+    public function address(): HasOne
+    {
+        return $this->hasOne(Addresses::class);
+    }
+
+    /**
+     * Many users belongs to detail_invocese
+     *
+     * @return BelongsTo
+     */
+    public function detail_invoice(): BelongsTo
+    {
+        return $this->belongsTo(detail_invoices::class);
+    }
+
+    /**
      * Check if the user is admin or not.
      *
      * @return bool
@@ -72,14 +95,7 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             $user = Auth::user();
             if($user->isAdmin == 1) return true;
-            return false;
         }
-        else
-        {
-            return false;
-        }
-//        Auth::check();
-//        $user = Auth::user();
-//
+        return false;
     }
 }

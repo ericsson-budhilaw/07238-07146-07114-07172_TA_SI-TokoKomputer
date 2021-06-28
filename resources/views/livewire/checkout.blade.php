@@ -4,7 +4,7 @@
         <div class="checkout-fields">
             <h3 class="text-xl font-bold text-gray-500">Detail Tagihan</h3>
             <hr />
-            <form class="my-8">
+            <form class="my-8" wire:submit.prevent="orderProceed">
                 <div class="my-4">
                     <label for="name" class="block text-gray-700 font-bold text-xl mb-2">Nama Lengkap</label>
                     <input type="text" wire:model.lazy="name"
@@ -38,13 +38,46 @@
                     @enderror
                 </div>
 
+                <div class="grid grid-cols-3 gap-2 my-4">
+                    <div class="">
+                        <label for="city" class="block text-gray-700 font-bold text-xl mb-2">Kota</label>
+                        <input type="text" wire:model.lazy="city"
+                               class="@error('city') border-2 border-red-500 @enderror
+                                   w-full bg-gray-300 focus:outline-none focus:border-purple-500 focus:bg-white"
+                               placeholder="Masukkan Nama Kota">
+                        @error('city')
+                            <span class="text-red-500" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+                    </div>
+                    <div class="">
+                        <label for="state" class="block text-gray-700 font-bold text-xl mb-2">Provinsi</label>
+                        <input type="text" wire:model.lazy="state"
+                               class="@error('state') border-2 border-red-500 @enderror
+                                   w-full bg-gray-300 focus:outline-none focus:border-purple-500 focus:bg-white"
+                               placeholder="Masukkan Nama Provinsi">
+                        @error('state')
+                            <span class="text-red-500" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+                    </div>
+                    <div class="">
+                        <label for="postalcode" class="block text-gray-700 font-bold text-xl mb-2">Kode Pos</label>
+                        <input type="text" wire:model.lazy="postalcode"
+                               class="@error('postalcode') border-2 border-red-500 @enderror
+                                   w-full bg-gray-300 focus:outline-none focus:border-purple-500 focus:bg-white"
+                               placeholder="Masukkan Kode Pos">
+                        @error('postalcode')
+                            <span class="text-red-500" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+                    </div>
+                </div>
+
                 <div class="my-4">
                     <label for="address" class="block text-gray-700 font-bold text-xl mb-2">Alamat</label>
                     <textarea name="address"
                               class="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full
                                     bg-gray-300 border border-grey-lighter py-4 px-4 focus:outline-none
                                     focus:border-purple-500 focus:bg-white"
-                              placeholder="Masukkan Alamat Anda"></textarea>
+                              placeholder="Masukkan Alamat Anda">{{ $addressText }}</textarea>
                     @error('address')
                         <span class="text-red-500" role="alert"><strong>{{ $message }}</strong></span>
                     @enderror

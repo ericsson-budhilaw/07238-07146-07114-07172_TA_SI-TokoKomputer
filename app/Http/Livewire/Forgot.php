@@ -34,6 +34,7 @@ class Forgot extends Component
         {
             session()->flash('success', __($status));
         }
+        $this->emit('alert_remove');
     }
 
     public function render()

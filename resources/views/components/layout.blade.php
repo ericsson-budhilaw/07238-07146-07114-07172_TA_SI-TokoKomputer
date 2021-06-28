@@ -56,6 +56,21 @@
             const alert = document.getElementById('alert')
             setTimeout(function () { alert.classList.add('hidden'); }, 3000);
         });
+
+        window.livewire.on('single_file_choosed', function() {
+            try {
+                let file = event.target.files[0];
+                if(file) {
+                    let reader = new FileReader();
+                    reader.onloadend = () => {
+                        window.livewire.emit('single_file_uploaded', reader.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        })
     </script>
 </body>
 </html>

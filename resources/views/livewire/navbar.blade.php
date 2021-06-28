@@ -82,7 +82,8 @@
                                     id="user-menu-button" aria-expanded="false" aria-haspopup="true"
                                     onclick="userMenu()">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                <img class="h-8 w-8 rounded-full" src="{{ asset($user->profile_photo_path) }}"
+                                     alt="{{ $user->name }}">
                             </button>
                         </div>
                         @endauth
@@ -99,12 +100,12 @@
                              aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                              id="user-account-navigation">
                             <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
-                               id="user-menu-item-0" wire:click="dashboard()">Dashboard</a>
+                            <span class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 cursor-pointer"
+                               id="user-menu-item-0" wire:click="dashboard()">Dashboard</span>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
                                id="user-menu-item-1">Settings</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
-                               id="user-menu-item-2" wire:click="logout()">Sign out</a>
+                            <span class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 cursor-pointer"
+                               id="user-menu-item-2" wire:click="logout()">Sign out</span>
                         </div>
                     </div>
                 </div>
