@@ -41,6 +41,8 @@ class Address extends Component
 
     public function changeAddress($address)
     {
+        $this->emit('alert_remove');
+
         if(empty($address))
         {
             session()->flash('error', 'Kolom alamat wajib diisi!');

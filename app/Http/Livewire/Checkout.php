@@ -32,13 +32,21 @@ class Checkout extends Component
     {
         $user = Auth::user();
 
-        if(is_null($user->telp)) return redirect()->route('user.home', 'profile');
+        if(is_null($user->telp))
+        {
+            session()->flash('error', 'Silahkan isi nomor telepon pada profile anda terlebih dahulu');
+            return redirect()->route('user.home', 'profile');
+        }
 
         $this->name = $user->name;
         $this->email = $user->email;
         $this->telp = $user->telp;
 
-        if(is_null($user->address)) return redirect()->route('user.home', 'profile');
+        if(is_null($user->address))
+        {
+            session()->flash('error', 'Anda belum mengisi alamat pada akun anda.');
+            return redirect()->route('user.home', 'address');
+        }
 
         // Address
         $address = $user->address;
