@@ -39,7 +39,7 @@
             </div>
             <div class="absolute bottom-6 bg-white">
                 <span class="text-green-500 text-base">Subtotal: </span>
-                <span class="text-gray-900 text-xl font-bold">{{ $total }}</span>
+                <span class="text-gray-900 text-xl font-bold">{{ $this->format($total) }}</span>
                 <button wire:click="checkout"
                     class="bg-green-600 px-4 py-2 text-xl text-gray-100 w-64 md:w-full">Konfirmasi Pesanan</button>
             </div>

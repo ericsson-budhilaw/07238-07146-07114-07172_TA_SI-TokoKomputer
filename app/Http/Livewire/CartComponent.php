@@ -104,4 +104,9 @@ class CartComponent extends Component
         $this->content = Cart::content();
         $this->emitTo('navbar', 'updateCount');
     }
+
+    public function format($angka){
+        $hasil = "Rp." . number_format($angka,0, ',' , '.');
+        return $hasil;
+    }
 }

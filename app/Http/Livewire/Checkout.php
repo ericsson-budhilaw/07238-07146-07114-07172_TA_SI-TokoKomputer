@@ -31,9 +31,14 @@ class Checkout extends Component
     public function mount()
     {
         $user = Auth::user();
+
+        if(is_null($user->telp)) return redirect()->route('user.home', 'profile');
+
         $this->name = $user->name;
         $this->email = $user->email;
         $this->telp = $user->telp;
+
+        if(is_null($user->address)) return redirect()->route('user.home', 'profile');
 
         // Address
         $address = $user->address;

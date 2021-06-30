@@ -32,6 +32,11 @@
             <p class="text-sm text-gray-600 mb-2">E-mail Pemesan</p>
             <p class="text-xl font-bold">{{ $user->email }}</p>
         </div>
+
+        <div class="order-email py-4">
+            <p class="text-sm text-gray-600 mb-2">Catatan Tambahan</p>
+            <p class="text-xl font-bold">{{ $invoice->remarks }}</p>
+        </div>
     </div>
 
     <h4 class="text-gray-600 mt-8 mb-4 text-xl font-bold">Rincian Pesanan:</h4>

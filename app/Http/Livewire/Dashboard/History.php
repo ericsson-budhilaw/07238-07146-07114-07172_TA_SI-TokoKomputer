@@ -18,17 +18,8 @@ class History extends Component
 
     protected $details;
 
-    public function mount()
-    {
-//        $auth = Auth::user();
-//        $user = User::find($auth->id)->first();
-//        $this->details = $user->detail_invoices->unique('id_invoices');
-        //dd($details);
-    }
-
     public function render()
     {
-        //$details = detail_invoices::where('id_users', Auth::user()->id)->paginate(8);
         $details = detail_invoices::where('id_users', Auth::user()->id)->get();
         $details = $details->unique('id_invoices');
         return view('livewire.dashboard.history', [

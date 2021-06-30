@@ -9,9 +9,16 @@
                 <div class="text-white text-base bg-red-600 w-full py-2 px-4 my-4" id="alert">
                     {{ session('error') }}
                 </div>
+            @elseif(session()->has('success'))
+                <div class="text-white text-base bg-green-600 w-full py-2 px-4 my-4" id="alert">
+                    {{ session('success') }}
+                </div>
             @endif
 
             <form wire:submit.prevent="register">
+
+                <div wire:loading.delay class="text-white bg-gray-400 w-full py-2 px-4 my-4">Loading...</div>
+
                 <div class="my-4">
                     <label for="name" class="block text-gray-700 font-bold text-xl mb-2">Nama</label>
                     <input type="text" wire:model.lazy="name"
@@ -48,6 +55,16 @@
                            class="@error('password_confirmation') border-2 border-red-500 @enderror
                                w-full bg-gray-300 focus:outline-none focus:border-purple-500 focus:bg-white"
                            placeholder="Masukkan Konfirmasi Password">
+                </div>
+                <div class="my-4">
+                    <label for="telepon" class="block text-gray-700 font-bold text-xl mb-2">Nomor Telepon</label>
+                    <input type="text" wire:model.lazy="telepon"
+                           class="@error('telepon') border-2 border-red-500 @enderror
+                               w-full bg-gray-300 focus:outline-none focus:border-purple-500 focus:bg-white"
+                           placeholder="Masukkan Nomor Telepon">
+                    @error('telepon')
+                        <span class="text-red-500" role="alert"><strong>{{ $message }}</strong></span>
+                    @enderror
                 </div>
                 <div>
                     <p>

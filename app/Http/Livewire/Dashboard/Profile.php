@@ -106,13 +106,15 @@ class Profile extends Component
         $image = str_replace($replace, '', $file);
         $image = str_replace(' ', '+', $image);
 
-        $imageName = strtolower(str_replace(' ', '_', $this->name) . '_' . $this->email);
+        //$imageName = strtolower(str_replace(' ', '_', $this->name) . '_' . $this->email);
         $fileName = Str::random(10) . '.' . $extension;
         Storage::disk('public')->put('avatar/' . $fileName, base64_decode($image));
 
         // Delete the old file
         $remove = str_replace('storage/', '', $this->user->profile_photo_path);
-        $del = File::delete(public_path('storage/' . $remove));
+        if($remove == 'avatar.png') return 'storage/avatar/' . $fileName;
+
+        File::delete(public_path('storage/' . $remove));
         return 'storage/avatar/' . $fileName;
     }
 

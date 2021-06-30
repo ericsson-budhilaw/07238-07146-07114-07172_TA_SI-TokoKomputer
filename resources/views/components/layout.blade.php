@@ -61,6 +61,11 @@
             window.livewire.emit('orderProceed', { address: addressText, noted, content, total });
         });
 
+        window.livewire.on('changeAddress', () => {
+            let addressText = document.getElementById('addressText').value;
+            window.livewire.emit('changeProceed', addressText);
+        })
+
         window.livewire.on('alert_remove', () => {
             const alert = document.getElementById('alert')
             setTimeout(function () { alert.classList.add('hidden'); }, 3000);

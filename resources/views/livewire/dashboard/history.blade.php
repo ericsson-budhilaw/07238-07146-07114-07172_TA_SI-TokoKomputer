@@ -7,7 +7,10 @@
         </h1>
         <hr />
 
-        <div class="table-data flex-col md:overflow-hidden overflow-auto">
+        @if(!$details->count() > 0)
+            <p class="text-gray-600 py-8">Belum ada order</p>
+        @else
+            <div class="table-data flex-col md:overflow-hidden overflow-auto">
             <table class="table-auto my-4">
                 <thead>
                 <tr>
@@ -42,8 +45,9 @@
             </table>
         </div>
 
-        <div class="py-4">
+            <div class="py-4">
             {{ $details->links() }}
         </div>
+        @endif
     </div>
 </div>

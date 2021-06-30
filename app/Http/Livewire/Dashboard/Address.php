@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Addresses;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Address extends Component
@@ -14,26 +15,60 @@ class Address extends Component
     public $zip;
     public $address;
 
+    protected $rules = [
+        'city' => 'required',
+        'state' => 'required|',
+        'zip' => 'required'
+    ];
+
+    protected $listeners = [
+        'changeProceed' => 'changeAddress'
+    ];
+
     public function mount()
     {
         $this->user = Auth::user();
-        $address = $this->user->address;
-        $this->city = $address->city;
-        $this->state = $address->state;
-        $this->zip = $address->postalcode;
-        $this->address = $address->address;
+
+        if(!is_null($this->user->address))
+        {
+            $address = $this->user->address;
+            $this->city = $address->city;
+            $this->state = $address->state;
+            $this->zip = $address->postalcode;
+            $this->address = $address->address;
+        }
     }
 
-    public function changeAddress()
+    public function changeAddress($address)
     {
+        if(empty($address))
+        {
+            session()->flash('error', 'Kolom alamat wajib diisi!');
+            return;
+        }
+
+        $this->validate();
+
         $user = $this->user;
 
-        $user->address()->update([
-            'city' => $this->city,
-            'state' => $this->state,
-            'postalcode' => $this->zip,
-            'address' => $this->address
-        ]);
+        if(is_null($user->address))
+        {
+            $user->address()->create([
+                'city' => $this->city,
+                'state' => $this->state,
+                'postalcode' => $this->zip,
+                'address' => $address
+            ]);
+        }
+        else
+        {
+            $user->address()->update([
+                'city' => $this->city,
+                'state' => $this->state,
+                'postalcode' => $this->zip,
+                'address' => $address
+            ]);
+        }
 
         session()->flash('success', "Data berhasil diubah");
         $this->emit('alert_remove');
