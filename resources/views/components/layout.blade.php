@@ -52,6 +52,15 @@
         const overlay = document.querySelector('.modal-overlay')
         overlay.addEventListener('click', toggleModal)
 
+        window.livewire.on('checkoutSubmit', (data) => {
+            let addressText = document.getElementById('addressText').value;
+            let noted       = document.getElementById('noted').value;
+            let content = data.content;
+            let total   = data.total;
+
+            window.livewire.emit('orderProceed', { address: addressText, noted, content, total });
+        });
+
         window.livewire.on('alert_remove', () => {
             const alert = document.getElementById('alert')
             setTimeout(function () { alert.classList.add('hidden'); }, 3000);

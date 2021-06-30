@@ -19,13 +19,33 @@ class Dashboard extends Component
 
     public function mount($active)
     {
-        $this->active = $active;
-        if(User::isAdmin())
+        $adminList = ['product', 'userlist', 'orderlist'];
+        $userList = ['profile', 'changePass', 'address', 'history'];
+        if(!in_array($active, $adminList) && !in_array($active, $userList)) return redirect()->route('home');
+
+        if(in_array($active, $adminList) || in_array($active, $userList))
         {
-            $this->isAdmin  = true;
-            $this->column   = "grid-cols-6";
+            $check = User::where('id', Auth::user()->id)->first()->isAdmin;
+            if(in_array($active, $adminList) && $check == 0)
+            {
+                return redirect()->route('user.home', 'profile');
+            }
+
+            if($check == 1)
+            {
+                $this->isAdmin  = true;
+                $this->column   = "grid-cols-6";
+            }
+
+            if($active == 'history' && $check == 1)
+            {
+                return redirect()->route('user.home', 'profile');
+            }
         }
-        $this->user = Auth::user();
+        else
+        {
+            return redirect()->route('home');
+        }
     }
 
     public function render()

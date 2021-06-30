@@ -20,6 +20,16 @@
                 <h3>Order List</h3>
             </div>
         @endif
+
+        @if(!$isAdmin)
+            <div class="tab-pane py-2 px-4 border-2 border-b-0 border-gray-200 cursor-pointer
+             {{ ($active == 'history') ? 'bg-gray-300 text-gray-800' : 'bg-gray-400 text-gray-600' }}"
+                 id="profile"
+                 wire:click="tab('history')">
+                <h3>Order History</h3>
+            </div>
+        @endif
+
         <div class="tab-pane py-2 px-4 border-2 border-b-0 border-gray-200 cursor-pointer
              {{ ($active == 'profile') ? 'bg-gray-300 text-gray-800' : 'bg-gray-400 text-gray-600' }}"
              id="profile"
@@ -47,7 +57,9 @@
         @elseif($active == 'userlist')
             <livewire:dashboard.user-list />
         @elseif($active == 'orderlist')
-            <h1>Order List</h1>
+            <livewire:dashboard.order-list />
+        @elseif($active == 'history')
+            <livewire:dashboard.history />
         @elseif($active == 'profile')
             <livewire:dashboard.profile />
         @elseif($active == 'changePass')

@@ -15,6 +15,7 @@ use App\Http\Livewire\Welcome;
 use App\Http\Livewire\Toko;
 use App\Http\Livewire\SingleProduct;
 use App\Http\Livewire\Checkout;
+use App\Http\Livewire\Thankyou;
 
 // Auth
 use App\Http\Livewire\Auth\EditPass as ChangePassword;
@@ -63,6 +64,8 @@ Route::group(['prefix' => 'email', 'middleware' => 'auth'], function() {
 });
 
 Route::get('product/{slug}', SingleProduct::class)->name('product.single');
+Route::get('thank-you/{invoice_id}', Thankyou::class)
+    ->middleware(['auth', 'verified'])->name('thankyou');
 
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //    return view('dashboard');

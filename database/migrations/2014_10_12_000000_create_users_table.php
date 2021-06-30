@@ -24,7 +24,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->unsignedBigInteger('detail_invoices_id');
             $table->timestamps();
+
+            $table->foreign('detail_invoices_id')->references('id')->on('detail_invoices')->onDelete('CASCADE');
         });
     }
 

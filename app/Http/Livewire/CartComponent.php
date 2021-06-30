@@ -14,7 +14,8 @@ class CartComponent extends Component
     public $cart;
 
     protected $listeners = [
-        'productAddedToCart' => 'updateCart'
+        'productAddedToCart' => 'updateCart',
+        'clearCart' => 'clearCart'
     ];
 
     /**

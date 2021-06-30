@@ -102,8 +102,6 @@
                             <!-- Active: "bg-gray-100", Not Active: "" -->
                             <span class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 cursor-pointer"
                                id="user-menu-item-0" wire:click="dashboard()">Dashboard</span>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
-                               id="user-menu-item-1">Settings</a>
                             <span class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 cursor-pointer"
                                id="user-menu-item-2" wire:click="logout()">Sign out</span>
                         </div>

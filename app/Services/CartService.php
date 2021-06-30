@@ -141,10 +141,8 @@ class CartService
 
     /**
      * Returns total price of the items in the cart.
-     *
-     * @return string
      */
-    public function total(): string
+    public function total()
     {
         $content    = $this->getContent();
 
@@ -152,7 +150,7 @@ class CartService
             return $total += $item->get('price') * $item->get('quantity');
         });
 
-        return $this->format_uang($total);
+        return $total;
     }
 
     /**

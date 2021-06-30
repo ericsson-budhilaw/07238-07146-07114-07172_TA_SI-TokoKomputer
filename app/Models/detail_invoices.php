@@ -30,25 +30,13 @@ class detail_invoices extends Model
         return $this->hasMany(Item::class);
     }
 
-    /**
-     * Define a relation with Invoice
-     * Detail_invoices can relate to many invoices
-     *
-     * @return HasMany
-     */
-    public function invoices(): HasMany
+    public function invoice()
     {
-        return $this->hasMany(invoices::class);
+        return $this->belongsTo(invoices::class);
     }
 
-    /**
-     * Define a relation with Users
-     * Customers can have many detail_invoices / invoices
-     *
-     * @return HasMany
-     */
-    public function users(): HasMany
+    public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

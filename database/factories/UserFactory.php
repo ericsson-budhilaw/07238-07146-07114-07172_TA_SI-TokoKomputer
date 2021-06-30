@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'isAdmin' => $this->faker->numberBetween(0, 1),
             'telp' => $this->faker->phoneNumber,
-            'profile_photo_path' => 'storage/avatar/default.png'
+            'profile_photo_path' => 'storage/avatar.png'
         ];
     }
 

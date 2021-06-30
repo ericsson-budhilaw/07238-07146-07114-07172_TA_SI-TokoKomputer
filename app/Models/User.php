@@ -74,14 +74,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Addresses::class);
     }
 
-    /**
-     * Many users belongs to detail_invocese
-     *
-     * @return BelongsTo
-     */
-    public function detail_invoice(): BelongsTo
+    public function detail_invoices()
     {
-        return $this->belongsTo(detail_invoices::class);
+        return $this->hasMany(detail_invoices::class, 'id_users');
     }
 
     /**
