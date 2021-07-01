@@ -27,7 +27,7 @@
 
                 <div class="upload-button mb-4">
                     <label class="cursor-pointer mt-6">
-                        <span class="mt-2 text-base leading-normal px-4 py-2 bg-blue-500 text-white text-sm rounded-full" >Select Avatar</span>
+                        <span class="mt-2 text-base leading-normal px-4 py-2 bg-blue-500 text-white text-sm rounded-full" >Upload Foto</span>
                         <input type='file' class="hidden" wire:change="$emit('single_file_choosed')" />
                     </label>
                     @error('photo')

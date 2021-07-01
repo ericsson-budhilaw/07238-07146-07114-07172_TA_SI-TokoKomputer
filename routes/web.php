@@ -13,12 +13,17 @@ use App\Http\Livewire\Verif\Notice as VerificationNotice;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Welcome;
 use App\Http\Livewire\Toko;
+use App\Http\Livewire\About;
+use App\Http\Livewire\Contact;
 use App\Http\Livewire\SingleProduct;
 use App\Http\Livewire\Checkout;
 use App\Http\Livewire\Thankyou;
 
 // Auth
 use App\Http\Livewire\Auth\EditPass as ChangePassword;
+use App\Http\Livewire\Auth\EditProduct;
+use App\Http\Livewire\Auth\CreateProduct;
+use App\Http\Livewire\Auth\AddAdmin;
 
 
 /*
@@ -33,8 +38,9 @@ use App\Http\Livewire\Auth\EditPass as ChangePassword;
 */
 
 Route::get("/toko", Toko::class)->name("toko");
-
 Route::get('/', Welcome::class)->name('home');
+Route::get('/tentang', About::class)->name('about');
+Route::get('/kontak', Contact::class)->name('contact');
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', Login::class)->name('login');
@@ -47,6 +53,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'verified']], functio
     Route::get('home/{active}', Dashboard::class)->name('user.home');
     Route::get('checkout', Checkout::class)->name('user.checkout');
     Route::get('{id}/edit/password', ChangePassword::class)->name('user.changepass');
+
+    // Produk
+    Route::get('/produk/edit/{id}', EditProduct::class)->name('product.edit');
+    Route::get('/produk/add', CreateProduct::class)->name('product.add');
+    Route::get('/admin/add', AddAdmin::class)->name('admin.add');
 });
 
 Route::group(['prefix' => 'email', 'middleware' => 'auth'], function() {
@@ -66,7 +77,3 @@ Route::group(['prefix' => 'email', 'middleware' => 'auth'], function() {
 Route::get('product/{slug}', SingleProduct::class)->name('product.single');
 Route::get('thank-you/{invoice_id}', Thankyou::class)
     ->middleware(['auth', 'verified'])->name('thankyou');
-
-//Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//    return view('dashboard');
-//})->name('dashboard');

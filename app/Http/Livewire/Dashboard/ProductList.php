@@ -10,8 +10,9 @@ class ProductList extends Component
 {
     use WithPagination;
 
+    public $confirming;
     public $itemModel;
-    public $num = 0;
+    public $num = 1;
 
     protected $items;
 
@@ -26,5 +27,27 @@ class ProductList extends Component
         return view('livewire.dashboard.product-list', [
             'items' => $items
         ]);
+    }
+
+    public function kill($id)
+    {
+        $this->confirming = $id;
+    }
+
+    public function addProduct()
+    {
+        return redirect()->route('product.add');
+    }
+
+    public function editProduct($id)
+    {
+        return redirect()->route('product.edit', $id);
+    }
+
+    public function deleteProduct($id)
+    {
+        Item::destroy($id);
+        session()->flash('success', 'Berhasil menghapus data');
+        return redirect()->route('user.home', 'product');
     }
 }
